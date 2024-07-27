@@ -1,0 +1,105 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block courses_detail_content%}
+
+<!-- Product section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-start">
+            <!-- Video section -->
+            <div class="col-md-8 mb-4">
+                <video class="img-fluid w-100" controls>
+                    <source src="{{ course.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Teacher section -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ course.teacher.image.url }}" class="card-img-top" alt="Teacher Photo">
+                    <div class="card-body">
+                        <h5 class="card-title">Teacher: {{ course.teacher.name }}</h5>
+                        <p class="card-text">{{ course.teacher.description }}</p>
+                        <p class="card-text">
+                            <strong>Email:</strong> <a href="mailto:{{ course.teacher.email }}">{{ course.teacher.email }}</a>
+                        </p>
+                        <p class="card-text">
+                            <strong>Phone:</strong> <a href="tel:{{ course.teacher.phone }}">{{ course.teacher.phone }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gx-4 gx-lg-5 mt-4">
+            <div class="col-md-8">
+                <div class="small mb-1">Rating: {{ course.number_of_ratings }}</div>
+                <h1 class="display-5 fw-bolder">{{ course.title }}</h1>
+                <div class="fs-5 mb-5">
+                    <span class="text-decoration-line-through">${{ course.price }}</span>
+                </div>
+                <p class="lead">{{ course.description }}</p>
+                <div class="d-flex">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                <h2>Latest comments</h2>
+            </div>
+
+            <!-- Comments section -->
+            <div class="media card p-4 mt-2">
+                <div class="media-body">
+                    <h3 class="mt-0">John Doe</h3>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+
+            <!-- Additional comments... -->
+
+        </div>
+
+        <div class="col-8 offset-2 mt-5">
+            <div class="p-5">
+                <div class="text-center">
+                    <h3>Add Comment</h3>
+                </div>
+                <form enctype="multipart/form-data" method="post">
+                    <div class="form-group mb-3">
+                        <label for="formGroupExampleInput">Your name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Your name">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="formGroupExampleInput2">Your email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Your email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="formGroupExampleInput2">Your comment</label>
+                        <textarea class="form-control" name="comment" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="fileUpload">Upload a file (optional)</label>
+                        <input type="file" class="form-control" id="fileUpload" name="file">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="submit" class="btn btn-success" value="Send">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

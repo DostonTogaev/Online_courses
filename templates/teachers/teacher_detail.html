@@ -1,0 +1,82 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %}
+    Teacher Details
+{% endblock %}
+{% block teacher_detail_content %}
+<!-- Teacher details section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <img class="card-img-top mb-5 mb-md-0 img-fluid w-50" src="{{ teacher.image.url }}" alt="{{ teacher.name }}" />
+            </div>
+            <div class="col-md-6">
+                <div class="small mb-1">Specialty: {{ teacher.specialty }}</div>
+                <h1 class="display-5 fw-bolder">{{ teacher.name }}</h1>
+                <div class="fs-5 mb-5">
+                    <span>{{ teacher.phone }}</span><br>
+                    <span>{{ teacher.email }}</span><br>
+                    <span>{{ teacher.address }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <p class="lead">{{ teacher.description }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comments section -->
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                <h2>Latest comments</h2>
+            </div>
+            {% for comment in teacher.comment_set.all %}
+            <div class="media card p-4 mt-2">
+                <div class="media-body">
+                    <h3 class="mt-0">{{ comment.author_name }}</h3>
+                    {{ comment.text }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-8 offset-2 mt-5">
+            <div class="p-5">
+                <div class="text-center">
+                    <h3>Add Comment</h3>
+                </div>
+                <form method="post" action="#" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="formGroupExampleInput">Your name</label>
+                        <input type="text" class="form-control" name="author_name" placeholder="Your name">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="formGroupExampleInput2">Your email</label>
+                        <input type="email" class="form-control" name="author_email" placeholder="Your email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="formGroupExampleInput2">Your comment</label>
+                        <textarea name="text" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="file">Upload file</label>
+                        <input type="file" class="form-control" name="file">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="submit" class="btn btn-success" value="Send">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
