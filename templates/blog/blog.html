@@ -66,28 +66,9 @@
                 </div>
 
                <div class="col-lg-4 mt-5 mt-lg-0">
-                    <!-- Author Bio -->
-                    <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        {% for author in authors %}
-                        <img src="{{ author.image.url }}" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-primary mb-3">{{ author.full_name }}</h3>
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <p class="text-white m-0">{{ author.Education }}</p>
-                    {% endfor %}
-                    </div>
 
-                    <!-- Search Form -->
-                    <div class="mb-5">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="Keyword">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary"><i
-                                            class="fa fa-search"></i></span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+
+
 
                     <!-- Category List -->
                     <div class="mb-5">
@@ -142,18 +123,7 @@
                         </a>
                     </div>
 
-                    <!-- Tag Cloud -->
-                    <div class="mb-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <div class="d-flex flex-wrap m-n1">
-                            <a href="" class="btn btn-outline-primary m-1">Design</a>
-                            <a href="" class="btn btn-outline-primary m-1">Development</a>
-                            <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                            <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                            <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                            <a href="" class="btn btn-outline-primary m-1">Consulting</a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

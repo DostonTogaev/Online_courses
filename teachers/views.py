@@ -10,7 +10,7 @@ def teachers(request):
     context = {
         'teachers': teachers
     }
-    return render(request, 'teachers/teachers.html', context )
+    return render(request, 'teachers/teachers.html', context)
 
 def teacher_details(request, teacher_id):
     teacher = get_object_or_404(Teacher, pk=teacher_id)

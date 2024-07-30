@@ -13,7 +13,6 @@ class Blog(models.Model):
 
 class Author(models.Model):
     full_name = models.CharField(max_length=100)
-    age = models.IntegerField()
     Education = models.TextField()
     image = models.ImageField(upload_to='images/')
 

@@ -421,21 +421,21 @@
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
                             <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="img/testimonial-1.jpg" alt="">
+                            <img class="img-fluid mx-auto mb-3" src="{% static 'blog/img/testimonial-1.jpg' %}" alt="">
                             <h5 class="m-0">Client Name</h5>
                             <span>Profession</span>
                         </div>
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
                             <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="img/testimonial-2.jpg" alt="">
+                            <img class="img-fluid mx-auto mb-3" src="{% static 'blog/img/testimonial-2.jpg' %}" alt="">
                             <h5 class="m-0">Client Name</h5>
                             <span>Profession</span>
                         </div>
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
                             <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="img/testimonial-3.jpg" alt="">
+                            <img class="img-fluid mx-auto mb-3" src="{% static 'blog/img/testimonial-3.jpg' %}" alt="">
                             <h5 class="m-0">Client Name</h5>
                             <span>Profession</span>
                         </div>
@@ -455,33 +455,17 @@
                 <h1>Latest From Our Blog</h1>
             </div>
             <div class="row pb-3">
+                {% for blog in blogs %}
                 <div class="col-lg-4 mb-4">
                     <div class="blog-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="img/blog-1.jpg" alt="">
-                        <a class="blog-overlay text-decoration-none" href="">
-                            <h5 class="text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita at ut clita</h5>
-                            <p class="text-primary m-0">Jan 01, 2050</p>
+                        <img class="img-fluid" src="{{ blog.image.url }}" alt="">
+                        <a class="blog-overlay text-decoration-none" href="{% url 'blog_detail' blog.id %}">
+                            <h5 class="text-white mb-3">{{ blog.title }}</h5>
+                            <p class="text-primary m-0">{{ blog.join_date }}</p>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="blog-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="img/blog-2.jpg" alt="">
-                        <a class="blog-overlay text-decoration-none" href="">
-                            <h5 class="text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita at ut clita</h5>
-                            <p class="text-primary m-0">Jan 01, 2050</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="blog-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="img/blog-3.jpg" alt="">
-                        <a class="blog-overlay text-decoration-none" href="">
-                            <h5 class="text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita at ut clita</h5>
-                            <p class="text-primary m-0">Jan 01, 2050</p>
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
