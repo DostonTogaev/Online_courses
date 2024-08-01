@@ -15,9 +15,17 @@
                 </div>
             </div>
         </div>
+   
     </div>
     <!-- Header End -->
-
+    <div> <form action="">
+                            <div class="input-group">
+                                <input type="search" name="search" class="form-control form-control-lg" placeholder="Keyword">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </form></div>
 
     <!-- Category Start -->
     <div class="container-fluid py-5">
@@ -27,16 +35,18 @@
                 <h1>Explore Top Subjects</h1>
             </div>
             <div class="row">
-               {% for course in courses %}
+               {% for category in categories %}
     <div class="col-lg-3 col-md-6 mb-4">
         <div class="cat-item position-relative overflow-hidden rounded mb-2">
             <video class="img-fluid" controls>
-                <source src="{{ course.video.url }}" type="video/mp4">
+                <source src="{{ category.video.url }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <a class="cat-overlay text-white text-decoration-none" href="{% url 'courses_detail'  course.id  %}">
-                <h4 class="text-white font-weight-medium">{{ course.title }}</h4>
-                <span>100 Courses</span>
+                <a class="cat-overlay text-white text-decoration-none" href="{% url 'courses_detail' category.id  %}">
+                    
+                </a>
+                <h4 class="text-white font-weight-medium">{{ category.title }}</h4>
+                <span>{{ category.count }} {{ category.name }}</span>
             </a>
         </div>
     </div>
@@ -56,7 +66,7 @@
                 <h1>Our Popular Courses</h1>
             </div>
             <div class="row">
-                {% for course in courses %}
+                {% for course in page_obj %}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="rounded overflow-hidden mb-2">
                              <video class="img-fluid" controls>
@@ -68,7 +78,7 @@
                                 <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>{{ course.number_of_students }} Students</small>
                                 <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>{{ course.duration }}</small>
                             </div>
-                            <a class="h5" href="">{{ course.title }}</a>
+                            <a class="h5" href="{% url 'courses_detail' course.id %}">{{ course.title }}</a>
                             <div class="border-top mt-4 pt-4">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>({{ course.number_of_ratings }})</small></h6>
@@ -80,6 +90,39 @@
                 </div>
                 {% endfor %}
             </div>
+        <div class="d-flex align-items-center justify-content-center mt-4">
+            {% if page_obj.has_previous %}
+                <a class="btn btn-sm btn-falcon-default me-1" href="?page={{ page_obj.previous_page_number }}" title="Previous">
+                    <span class="fas fa-chevron-left"></span>
+                </a>
+            {% else %}
+                <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" disabled>
+                    <span class="fas fa-chevron-left"></span>
+                </button>
+            {% endif %}
+            <ul class="pagination mb-0">
+                {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% if page_obj.has_next %}
+                <a class="btn btn-sm btn-falcon-default ms-1" href="?page={{ page_obj.next_page_number }}" title="Next">
+                    <span class="fas fa-chevron-right"></span>
+                </a>
+            {% else %}
+                <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" disabled>
+                    <span class="fas fa-chevron-right"></span>
+                </button>
+            {% endif %}
+        </div>
         </div>
     </div>
     <!-- Courses End -->

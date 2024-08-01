@@ -1,8 +1,7 @@
-from django.contrib import admin
-from django.urls import path, include
-from teachers.views import teachers, teacher_details
+from django.urls import path
+from teachers.views import TeacherListView, TeacherDetailView
 urlpatterns = [
-    path('teachers/', teachers, name='teachers'),
-    path('teacher_details/<int:teacher_id>/', teacher_details, name='teacher_details'),
+    path('teachers/', TeacherListView.as_view(), name='teachers'),
+    path('teacher_details/<int:teacher_id>/', TeacherDetailView.as_view(), name='teacher_details'),
 
 ]

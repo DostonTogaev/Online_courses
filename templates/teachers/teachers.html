@@ -28,7 +28,7 @@
                 <h1>Meet Our Teachers</h1>
             </div>
             <div class="row">
-                {% for teacher in teachers %}
+                {% for teacher in page_obj %}
                 <div class="col-md-6 col-lg-3 text-center team mb-4">
                     <div class="team-item rounded overflow-hidden mb-2">
                         <div class="team-img position-relative">
@@ -43,7 +43,7 @@
                         </div>
                         <a href="{% url 'teacher_details' teacher.id %}" class="text-decoration-none">
                              <div class="bg-secondary p-4">
-                                 <h5>{{ teacher.name }}</h5>
+                                 <h5>{{ teacher.category }}</h5>
                                
                               </div>
                         </a>
@@ -51,6 +51,40 @@
                 </div>
                {% endfor %}
             </div>
+                <div class="d-flex align-items-center justify-content-center mt-4">
+            {% if page_obj.has_previous %}
+                <a class="btn btn-sm btn-falcon-default me-1" href="?page={{ page_obj.previous_page_number }}" title="Previous">
+                    <span class="fas fa-chevron-left"></span>
+                </a>
+            {% else %}
+                <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" disabled>
+                    <span class="fas fa-chevron-left"></span>
+                </button>
+            {% endif %}
+            <ul class="pagination mb-0">
+                {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% if page_obj.has_next %}
+                <a class="btn btn-sm btn-falcon-default ms-1" href="?page={{ page_obj.next_page_number }}" title="Next">
+                    <span class="fas fa-chevron-right"></span>
+                </a>
+            {% else %}
+                <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" disabled>
+                    <span class="fas fa-chevron-right"></span>
+                </button>
+            {% endif %}
+        </div>
+
         </div>
     </div>
     <!-- Team End -->

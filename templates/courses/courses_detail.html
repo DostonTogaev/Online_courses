@@ -4,6 +4,7 @@
 {% endblock %}
 {% block courses_detail_content%}
 
+
 <!-- Product section -->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -43,7 +44,7 @@
                 </div>
                 <p class="lead">{{ course.description }}</p>
                 <div class="d-flex">
-                    
+                    <!-- Add any buttons or additional info here if needed -->
                 </div>
             </div>
         </div>
@@ -54,19 +55,18 @@
     <div class="row">
         <div class="col-12">
             <div class="text-center">
-                <h2>Latest comments</h2>
+                <h2>Latest comments ({{ count }})</h2>
             </div>
 
-            <!-- Comments section -->
-            <div class="media card p-4 mt-2">
-                <div class="media-body">
-                    <h3 class="mt-0">John Doe</h3>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            {% for comment in comments %}
+                <div class="media card p-4 mt-2">
+                    <div class="media-body">
+                        <h3 class="mt-0">{{ comment.name }} => {{ comment.created_date }}</h3>
+                        {{ comment.message | linebreaks }}
+                    </div>
                 </div>
-            </div>
-
+            {% endfor %}
             <!-- Additional comments... -->
-
         </div>
 
         <div class="col-8 offset-2 mt-5">
@@ -74,22 +74,34 @@
                 <div class="text-center">
                     <h3>Add Comment</h3>
                 </div>
-                <form enctype="multipart/form-data" method="post">
+                <form enctype="multipart/form-data" method="post" action="{% url 'add_comment' course.id %}">
+                    {% csrf_token %}
                     <div class="form-group mb-3">
                         <label for="formGroupExampleInput">Your name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Your name">
+                        <input type="text" class="form-control" placeholder="Your name" name="name" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="formGroupExampleInput2">Your email</label>
-                        <input type="email" class="form-control" name="email" placeholder="Your email">
+                        <input type="email" class="form-control" placeholder="Your email" name="email" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="formGroupExampleInput2">Your comment</label>
-                        <textarea class="form-control" name="comment" id="" cols="30" rows="10"></textarea>
+                        <textarea name="message" class="form-control" id="" cols="30" rows="10" required></textarea>
                     </div>
                     <div class="form-group mb-3">
                         <label for="fileUpload">Upload a file (optional)</label>
                         <input type="file" class="form-control" id="fileUpload" name="file">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="rating">Rating *</label>
+                        <select name="rating" class="form-control" required>
+                            <option value="">Select rating</option>
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        </select>
                     </div>
                     <div class="form-group mb-3">
                         <input type="submit" class="btn btn-success" value="Send">

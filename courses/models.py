@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Category(models.Model):
@@ -18,9 +19,18 @@ class Comment(models.Model):
 
     name = models.CharField(max_length=50)
     email = models.EmailField()
-    comment = models.TextField()
+    message = models.TextField()
     rating = models.CharField(max_length=100, choices=RatingChoices.choices, default=RatingChoices.Zero.value)
     course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='comments')
+    file = models.FileField(upload_to='media/comments')
+    is_active = models.BooleanField(default=False)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return f'{self.name} => by comment'
+
 
 class Course(models.Model):
     title = models.CharField(max_length=100)
@@ -29,11 +39,14 @@ class Course(models.Model):
     number_of_ratings = models.IntegerField(default=0)
     price = models.FloatField()
     duration = models.IntegerField()
-    teachers = models.ForeignKey('teachers.Teacher', on_delete=models.CASCADE, related_name='courses')
+    teachers = models.ManyToManyField('teachers.Teacher', related_name='courses')
     video = models.FileField(upload_to='media/courses')
     category = models.ForeignKey(Category, related_name='courses', on_delete=models.CASCADE, null=True, blank=True)
 
+    def get_teachers(self):
+        return ", ".join([teacher.name for teacher in self.teachers.all()])
 
+    get_teachers.short_description = 'Teachers'
 
     @property
     def hours(self):

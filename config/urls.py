@@ -21,12 +21,14 @@ from django.urls import path
 from django.urls.conf import include
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('', include('teachers.urls')),
     path('', include('courses.urls')),
+    path('', include('students.urls')),
+    path('social-auth/',
+             include('social_django.urls', namespace='social')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
